@@ -12,6 +12,9 @@ body {
   justify-content: center;
 
 }
+img{
+    height: 300px;
+}
 .topnav {
   overflow: hidden;
   background-color: #e9e9e9;
