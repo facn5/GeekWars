@@ -5,3 +5,5 @@ const userExist = (username, cb) => query.select(`SELECT count(id) from users wh
 const checkPassword = (username, password, cb) => query.select(`SELECT count(id) from users where username = '${username}' AND password = '${password}'`, cb)
 
 const addUser = (username,password,email,cb) => query.insert(`INSERT INTO users (username,password,email) VALUES ($1,$2,$3)`,[username,password,email],cb)
+
+const getQuestions = (cb) => query.select(`SELECT * from qa`)
