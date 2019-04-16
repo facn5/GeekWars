@@ -36,7 +36,7 @@ const updatequery = (sql, cb) => {
 };
 
 module.exports = {
-  selectquery,
-  insertquery,
-  updatequery
+  select:selectquery,
+  insert:insertquery,
+  update:updatequery
 };
