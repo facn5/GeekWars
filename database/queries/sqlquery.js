@@ -1,6 +1,7 @@
 const databaseConnection = require('../db_connection.js');
 
-const selectquery = (sql,cb) => {
+
+selectquery = (sql, cb) => {
   databaseConnection.query(sql, (err, res) => {
     if (err) {
       cb(err);
@@ -10,4 +11,22 @@ const selectquery = (sql,cb) => {
   });
 };
 
-module.exports = selectquery;
+insertquery = (sql, args, cb) => {
+  databaseConnection.query(
+    s,
+    args,
+    (err, res) => {
+      if (err) {
+        return cb(err);
+      } else {
+        cb(null, res);
+      }
+    }
+  );
+};
+
+
+module.exports = {
+  selectquery,
+  insertquery
+};
