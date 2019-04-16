@@ -14,19 +14,19 @@
 
 
 
-    <form action="/sign_in" method="POST">
+    <form >
   <div class="container">
     <h2>Login Form</h2>
         <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <input type="text" id="user" placeholder="Enter Username" name="uname" required>
 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <input type="password" id="pass" placeholder="Enter Password" name="psw" required>
 
-        <button type="submit">Login</button>
-
+        <button id="loginbtn" name="login" type="submit">Login</button>
+        <label for="login"> username or password is invaild</label>
       </div>
-
+</form>
     <form action="/sign_up" method="POST">
       <div class="container">
         <h1>Sign Up</h1>
@@ -51,5 +51,7 @@
             <button type="submit" class="signupbtn">Sign Up</button>
       </div>
     </form>
+    <script src="login.js"></script>
+
   </body>
 </html>
