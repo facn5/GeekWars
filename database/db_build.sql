@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(40) NOT NULL,
   password VARCHAR(200) NOT NULL,
+  email TEXT NOT NULL,
   score TEXT DEFAULT 0
   );
 
