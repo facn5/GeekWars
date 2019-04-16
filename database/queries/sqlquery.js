@@ -25,8 +25,18 @@ insertquery = (sql, args, cb) => {
   );
 };
 
+updatequery = (sql, cb) => {
+  databaseConnection.query(sql, (err, res) => {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, res);
+    }
+  });
+};
 
 module.exports = {
   selectquery,
-  insertquery
+  insertquery,
+  updatequery
 };
