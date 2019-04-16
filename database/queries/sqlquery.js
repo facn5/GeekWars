@@ -13,7 +13,7 @@ const selectquery = (sql, cb) => {
 
 const insertquery = (sql, args, cb) => {
   databaseConnection.query(
-    s,
+    sql,
     args,
     (err, res) => {
       if (err) {
