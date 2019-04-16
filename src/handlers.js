@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const qs = require('querystring');
 
+
  let extType = {
   html: { "content-type": "text/html" },
   css: { "content-type": "text/css" },
@@ -37,7 +38,6 @@ const handlePublic = (url, res) => {
   })
 }
 
-
  const handle404 = (res) => {
   let pathFile = path.join(__dirname, "..", "public", "404.html");
   fs.readFile(pathFile, (err, file) => {
@@ -50,10 +50,16 @@ const handlePublic = (url, res) => {
   })
 }
 
+const handleSignIn = (req,res)=>{
 
+}
+const handleSignUp = (req,res)=>{
+
+}
  module.exports = {
   home: handleHome,
   public: handlePublic,
-  error404: handle404
-
+  error404: handle404,
+  signup:handleSignUp,
+  signin:handleSignIn
  }
