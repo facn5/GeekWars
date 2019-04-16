@@ -8,7 +8,7 @@ const router = (req, res) => {
     handler.home(res);
   }
 else{
-  handler.error(res);
+  handler.error404(res);
 }
 
 }

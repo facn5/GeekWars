@@ -21,8 +21,25 @@ const handleHome = (res) => {
     }
   })
 }
+const handlePublic = (url, res) => {
+  const ext = url.split('.')[1];
+  let pathFile = path.join(__dirname, '..', url);
+  fs.readFile(pathFile, (err, file) => {
+    if (err) {
+      res.writeHead(500);
+      res.end("error500");
+    } else {
+      res.writeHead(200, extType[ext]);
+      res.end(file);
+    }
+  })
+}
+const handle500 = (res) => {
 
-const handleError = (res) => {
+
+}
+
+const handle404 = (res) => {
   let pathFile = path.join(__dirname, "..", "public", "404.html");
   fs.readFile(pathFile, (err, file) => {
     if (err) {
@@ -38,6 +55,7 @@ const handleError = (res) => {
 
 module.exports = {
   home: handleHome,
-  error: handleError
+  public: handlePublic,
+  error404: handle404
 
 }
