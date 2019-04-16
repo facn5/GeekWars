@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS qa (
   id SERIAL PRIMARY KEY,
-  qustion TEXT NOT NULL,
+  question TEXT NOT NULL,
   answer TEXT NOT NULL,
   option1 TEXT NOT NULL,
   option2 TEXT NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS qa (
 INSERT INTO qa (question,answer,option1,option2,option3) VALUES
 ('What is the purpose of CASCADE in SQL','To drop all the related fields/table to the current table','To get the top row','To clear the database','To clear the current row'),
 ('What is Javascript','Programing language','Scripting language','markdown','not this'),
-('What is the first?','what','me','you','we')
+('What is the first?','what','me','you','we');
 
 CREATE TABLE IF NOT EXISTS leaderboard (
   id SERIAL PRIMARY KEY,
