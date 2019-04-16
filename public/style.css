@@ -17,7 +17,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-size: 24px;
+  font-size: 26px;
 margin-top: 10%;
 
 }
@@ -67,6 +67,9 @@ img{
 
 
 @media only screen and (min-width: 700px) {
+  img{
+    height: 300px;
+  }
     .topnav{
       margin-bottom: 3%;
     }
@@ -78,6 +81,6 @@ img{
     }
     .topnav .login-container button {
 
-      
+        padding: 15px 20px;
     }
   }
