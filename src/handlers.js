@@ -15,7 +15,7 @@ const handle500 = (res,err) => {
  }
 const handleHome = (res) => {
   let pathFile = path.join(__dirname, "..", "public", "index.html");
-  fs.readFile(pathFile, (err, file) => {	
+  fs.readFile(pathFile, (err, file) => {
     if (err) {
        handle500(res,err)
     } else {
@@ -26,7 +26,7 @@ const handleHome = (res) => {
 }
 const handlePublic = (url, res) => {
   const ext = url.split('.')[1];
-  let pathFile = path.join(__dirname, '..', url);
+  let pathFile = path.join(__dirname, '..','public', url);
   fs.readFile(pathFile, (err, file) => {
     if (err) {
        handle500(res,err)
