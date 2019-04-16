@@ -12,6 +12,10 @@ const router = (req, res) => {
     if(req.method === 'POST'){
       handler.signup(req,res);
     }
+  } else if(url === '/sign_in'){
+    if(req.method === 'POST'){
+      handler.signin(req,res);
+    }
   } else {
     handler.error404(res);
   }
