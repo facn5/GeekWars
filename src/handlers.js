@@ -58,15 +58,15 @@ const handleSignIn = (req,res)=>{
   req.on("end", () => {
     if (body != null) {
       const userdata = qs.parse(body);
-      queries.userExist(userdata.uname, userdata.psw, (err, result) => {
+      queries.checkPassword(userdata.uname, userdata.psw, (err, result) => {
         if (err) {
           handle500(res,err);
         }
-        if(result === 0){
-          res.writeHead(401)
-          res.end()
-        }else if(results === 1){
+        if(result === 1){
           res.writeHead(200)
+          res.end()
+        }else{
+          res.writeHead(401)
           res.end()
         }
       });
@@ -74,7 +74,32 @@ const handleSignIn = (req,res)=>{
   });
 }
 const handleSignUp = (req,res)=>{
-
+  let body = "";
+  req.on("data", chunk => {
+    body += chunk.toString();
+  });
+  req.on("end", () => {
+    if (body != null) {
+      const userdata = qs.parse(body);
+      queries.userExist(userdata.uname,(err, resultexist) => {
+        if (err) {
+          handle500(res,err);
+        }
+        if(resultexist === 0){
+          queries.addUser(username,password,email,(err,result)=>{
+            if(err){
+              handle500(res,err);
+            }
+            res.writeHead(200)
+            res.end()
+          })
+        }else{
+          res.writeHead(401)
+          res.end()
+        }
+      });
+    }
+  });
 }
  module.exports = {
   home: handleHome,
