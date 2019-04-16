@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "dependencies": {
+    "env2": "^2.2.2",
     "nodemon": "^1.18.11",
     "supertest": "^4.0.2",
     "tap-spec": "^5.0.0",
