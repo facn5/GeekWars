@@ -26,7 +26,8 @@ const handleHome = (res) => {
 }
 const handlePublic = (url, res) => {
   const ext = url.split('.')[1];
-  let pathFile = path.join(__dirname, '..', url);
+  let pathFile = path.join(__dirname, "..", "public", url);
+  console.log(url);
   fs.readFile(pathFile, (err, file) => {
     if (err) {
        handle500(res,err)
