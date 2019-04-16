@@ -1,7 +1,7 @@
 const databaseConnection = require('../db_connection.js');
 
 
-selectquery = (sql, cb) => {
+const selectquery = (sql, cb) => {
   databaseConnection.query(sql, (err, res) => {
     if (err) {
       cb(err);
@@ -11,7 +11,7 @@ selectquery = (sql, cb) => {
   });
 };
 
-insertquery = (sql, args, cb) => {
+const insertquery = (sql, args, cb) => {
   databaseConnection.query(
     s,
     args,
@@ -25,7 +25,7 @@ insertquery = (sql, args, cb) => {
   );
 };
 
-updatequery = (sql, cb) => {
+const updatequery = (sql, cb) => {
   databaseConnection.query(sql, (err, res) => {
     if (err) {
       cb(err);
