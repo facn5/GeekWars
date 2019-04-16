@@ -15,10 +15,10 @@ function updateQues(response) {
 	document.querySelector("#question").innerHTML = data.question;
 	var options = data.incorrect_answers;
 	options.splice(randIndex(),0,data.correct_answer);
-	document.querySelector("#optn1").innerHTML = options[0];
-	document.querySelector("#optn2").innerHTML = options[1];
-	document.querySelector("#optn3").innerHTML = options[2];
-	document.querySelector("#optn4").innerHTML = options[3];
+	document.querySelector("#optn1").innerHTML = ;
+	document.querySelector("#optn2").innerHTML = ;
+	document.querySelector("#optn3").innerHTML = ;
+	document.querySelector("#optn4").innerHTML = ;
 	loading(false);
 }
 for (var i = 0; i < ans.length; i++) {
