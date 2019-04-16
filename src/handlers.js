@@ -1,10 +1,10 @@
-const http = require('http');
-const router = require('./router');
+const fs = require('fs');
+const path = require('path');
+const qs = require('querystring');
 
-const server = http.createServer(router);
-
-const port = process.env.PORT || 5666;
-
-server.listen(port, () => {
-  console.log(`Server is running at ${port}`);
-});
+let extType = {
+  html: { "content-type": "text/html" },
+  css: { "content-type": "text/css" },
+  js: { "content-type": "application/javascript" },
+  json: { 'content-type': 'application/json' }
+}
