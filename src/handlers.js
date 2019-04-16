@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const qs = require('querystring');
+const query = require('../database/queries/queries.js');
 
  let extType = {
   html: { "content-type": "text/html" },
@@ -37,7 +38,6 @@ const handlePublic = (url, res) => {
   })
 }
 
-
  const handle404 = (res) => {
   let pathFile = path.join(__dirname, "..", "public", "404.html");
   fs.readFile(pathFile, (err, file) => {
@@ -50,10 +50,61 @@ const handlePublic = (url, res) => {
   })
 }
 
-
+const handleSignIn = (req,res)=>{
+  let body = "";
+  req.on("data", chunk => {
+    body += chunk.toString();
+  });
+  req.on("end", () => {
+    if (body != null) {
+      const userdata = qs.parse(body);
+      queries.checkPassword(userdata.uname, userdata.psw, (err, result) => {
+        if (err) {
+          handle500(res,err);
+        }
+        if(result === 1){
+          res.writeHead(200)
+          res.end()
+        }else{
+          res.writeHead(401)
+          res.end()
+        }
+      });
+    }
+  });
+}
+const handleSignUp = (req,res)=>{
+  let body = "";
+  req.on("data", chunk => {
+    body += chunk.toString();
+  });
+  req.on("end", () => {
+    if (body != null) {
+      const userdata = qs.parse(body);
+      queries.userExist(userdata.uname,(err, resultexist) => {
+        if (err) {
+          handle500(res,err);
+        }
+        if(resultexist === 0){
+          queries.addUser(username,password,email,(err,result)=>{
+            if(err){
+              handle500(res,err);
+            }
+            res.writeHead(200)
+            res.end()
+          })
+        }else{
+          res.writeHead(401)
+          res.end()
+        }
+      });
+    }
+  });
+}
  module.exports = {
   home: handleHome,
   public: handlePublic,
-  error404: handle404
-
+  error404: handle404,
+  signup:handleSignUp,
+  signin:handleSignIn
  }
