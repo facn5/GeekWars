@@ -5,12 +5,10 @@ const router = (req, res) => {
 
   let url = req.url;
   if (url === "/") {
-    console.log("home page");
+    handler.home(res);
   }
 else{
-  console.log("error");
-
-
+  handler.error(res);
 }
 
 }
