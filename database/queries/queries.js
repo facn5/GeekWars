@@ -1,0 +1,13 @@
+const query = require('./sqlquery.js')
+
+const userExist = (username, cb) => query.select(`SELECT count(id) from users where username = '${username}'`, cb)
+
+const checkPassword = (username, password, cb) => query.select(`SELECT count(id) from users where username = '${username}' AND password = '${password}'`, cb)
+
+const addUser = (username,password,email,cb) => query.insert(`INSERT INTO users (username,password,email) VALUES ($1,$2,$3)`,[username,password,email],cb)
+
+const getQuestions = (cb) => query.select(`SELECT * from qa`)
+
+// const getScore = (username,cb) => query.select(`SELECT score from users where username='${username}'`)
+
+const addScore = (username,score,cb) => query.update(`UPDATE users SET score = (SELECT score from users where username='$1')+$2 where username='$1'`,[username,score],cb)
