@@ -1,5 +1,5 @@
 const url = require('url');
-const handler = require('./handler');
+const handler = require('./handlers');
 
 const router = (req, res) => {
 
