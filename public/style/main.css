@@ -13,18 +13,21 @@ body{
 	display: flex;
 	        flex-direction: column;
 
-	        justify-content: center;
 
 	        align-items: center;
 }
 .twidth{
 	max-width: 600px;
 	width: 100%;
+
 }
 .container{
 	background: white;
 	margin: 0 auto;
 	text-align: center;
+ height: 30%;
+ margin-top: 20%;
+
 }
 h2{
 	color: #3E333F;
@@ -45,14 +48,14 @@ h2{
 }
 .optnContainer{
 	position: relative;
-
+height: 70%;
 	        align-items: stretch;
 	width: 100%;
 }
 .answer{
 	color: #F2F2F2;
 	background: #153B44;
-
+ height: 23%;
 	        flex-grow: 1;
 	min-height: 51px;
 	padding: 1rem;
@@ -71,16 +74,14 @@ h2{
 	background: #04a569;
 }
 .score{
-
-	        flex-direction: row;
-
-	        align-items: stretch;
-	margin-top: 2rem;
+ flex-direction: row;
+ align-items: stretch;
+margin-top: 2rem;
 }
 .score p{
 	text-align: center;
 	padding: .8rem;
-	width: 50%;
+	width: 80%;
 	color: white;
 	letter-spacing: 5px;
 }
@@ -164,4 +165,11 @@ small{
 	        animation-timing-function: linear;
 	        animation-delay: 0;
 	        animation-iteration-count: infinite;
+}
+
+@media only screen and (min-width: 700px) {
+.container{
+margin-top: 0;
+}
+
 }

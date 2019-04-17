@@ -16,7 +16,13 @@ const router = (req, res) => {
     if(req.method === 'POST'){
       handler.signin(req,res);
     }
-  } else {
+  } else if(url === '/getquestions'){
+
+  handler.questions(res)
+
+
+  }
+  else {
     handler.error404(res);
   }
 

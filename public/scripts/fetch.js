@@ -1,5 +1,5 @@
-function getData(url) {
-  fetch(url)
+function getData(cb) {
+  fetch("/getquestions")
     .then(response => {
       if (response.status !== 200) {
         console.log(
@@ -10,7 +10,7 @@ function getData(url) {
       return response.json();
     })
     .then((myJson) => {
-      console.log(myJson);
+      return(cb(myJson));
     })
     .catch(err => {
       console.log("Fetch Error :-S", err);
