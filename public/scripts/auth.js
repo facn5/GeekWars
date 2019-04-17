@@ -7,6 +7,6 @@ function verifyUser(cb){
     return cb(data);
   })
   .catch(function(error){
-    console.log("error auth");;
+    console.log("error auth");
   })
 }
