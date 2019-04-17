@@ -6,6 +6,7 @@ verifyUser(function(data){
       var waiting = document.querySelector("#waiting");
       var loadAnim = document.querySelector("#waitanim");
       var curScore = document.querySelector("#hscore").textContent;
+      let logoutbtn = document.getElementById('logoutbtn');
 
       function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
