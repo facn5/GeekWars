@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <link rel="stylesheet" type="text/css" href="./style/sign.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="utf-8">
-    <title>Log in - GeekWars</title>
-  </head>
-  <body>
-    <div id="main-logo">
+<head>
+  <link rel="stylesheet" type="text/css" href="./style/sign.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta charset="utf-8">
+  <title>Log in - GeekWars</title>
+</head>
+
+<body>
+  <div id="main-logo">
     <img src="./assets/logo.jpg">
+  </div>
+
+
+  <form method="POST" >
+    <div class="container">
+      <h2>Login Form</h2>
+      <label for="uname"><b>Username</b></label>
+      <input type="text" value="" id="user" placeholder="Enter Username" name="uname" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" id="pass" value="" placeholder="Enter Password" name="psw" required>
+
+      <button id="loginbtn" onclick="fetchlogin()" >Login</button>
+      <label for="login"> username or password is invaild</label>
     </div>
+  </form>
+  <form action="/sign_up" method="POST">
+    <div class="container">
+      <h1>Sign Up</h1>
+      <hr>
+
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Email" name="username" required>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
 
 
-
-    <form >
-  <div class="container">
-    <h2>Login Form</h2>
-        <label for="uname"><b>Username</b></label>
-        <input type="text" id="user" placeholder="Enter Username" name="uname" required>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" id="pass" placeholder="Enter Password" name="psw" required>
-
-        <button id="loginbtn" name="login" type="submit">Login</button>
-        <label for="login"> username or password is invaild</label>
+      <div class="clearfix">
       </div>
-</form>
-    <form action="/sign_up" method="POST">
-      <div class="container">
-        <h1>Sign Up</h1>
-        <hr>
 
-        <label for="username"><b>Username</b></label>
-        <input type="text" placeholder="Enter Email" name="username" required>
-
-        <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="email" required>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-
-        <label for="psw-repeat"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </form>
 
 
-        <div class="clearfix">
-        </div>
+</body>
+<script type="text/javascript" src="./scripts/login.js"></script>
 
-            <button type="submit" class="signupbtn">Sign Up</button>
-      </div>
-    </form>
-    <script src="./scripts/login.js"></script>
-
-  </body>
 </html>
