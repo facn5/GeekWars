@@ -3,51 +3,77 @@ var skipQues = document.querySelector("#skip");
 var waiting = document.querySelector("#waiting");
 var loadAnim = document.querySelector("#waitanim");
 var curScore = document.querySelector("#hscore").textContent;
-console.log(curScore);
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+ var question = getRandomInt(9);
+ console.log(curScore);
 var data;
 
-
+// getRandomInt(9)
 getData((dataq) => {
   data = dataq;
-  document.querySelector("#question").innerHTML = dataq[0].question;
-  document.querySelector("#optn1").innerHTML = dataq[0].option1;
-  document.querySelector("#optn2").innerHTML = dataq[0].answer;
-  document.querySelector("#optn3").innerHTML = dataq[0].option2;
-  document.querySelector("#optn4").innerHTML = dataq[0].option3;
-  for (var i = 0; i < ans.length; i++) {
-    ans[i].addEventListener("click", function() {
-      checkAnswer(this);
-    });
-  }
+	function updateQues(response) {
 
-  function checkAnswer(ele) {
-    if (ele.innerHTML === dataq[0].answer) {
-      ele.classList.add("correct");
-      // loading(true);
-      document.querySelector("#hscore").innerHTML = ++curScore;
-      changeQues();
-    } else {
-      ele.classList.add("incorrect");
-      // loading(true);
-      document.querySelector("#hscore").innerHTML = --curScore;
-      changeQues();
-    }
-  }
-  console.log(dataq[0].question)
+  question++;
+
+
+
+		document.querySelector("#question").innerHTML =dataq[question].question;
+		document.querySelector("#optn1").innerHTML = dataq[question].option1;
+		document.querySelector("#optn2").innerHTML = dataq[question].answer;
+		document.querySelector("#optn3").innerHTML = dataq[question].option2;
+		document.querySelector("#optn4").innerHTML = dataq[question].option3;
+		// if(curScore>5){
+		// 	console.log("you finished the game")
+		// }
+
+	}
+		document.querySelector("#question").innerHTML =dataq[question].question;
+		document.querySelector("#optn1").innerHTML = dataq[question].option1;
+		document.querySelector("#optn2").innerHTML = dataq[question].answer;
+		document.querySelector("#optn3").innerHTML = dataq[question].option2;
+		document.querySelector("#optn4").innerHTML = dataq[question].option3;
+		for (var i = 0; i < ans.length; i++) {
+			ans[i].addEventListener("click", function() {
+				if(question<9){
+
+					checkAnswer(this);
+				}
+				else{
+					alert("you finished all the questions, go to the leaderboard page to find your score!");
+					curScore=0;
+
+				}
+			});
+		}
+
+		function checkAnswer(ele) {
+			if (ele.innerHTML === dataq[question].answer) {
+		//		ele.classList.add("correct");
+				document.querySelector("#hscore").innerHTML = ++curScore;
+
+			 updateQues();
+			} else {
+//				ele.classList.add("incorrect");
+				// loading(true);
+				document.querySelector("#hscore").innerHTML = --curScore;
+
+			}
+		}
+		console.log(dataq[0].question)
+
+
+
+
+
+
 
 })
 
-function updateQues(response) {
-  // data = response.data.results[0];
-  // document.querySelector("#question").innerHTML = data.question;
-  // var options = data.incorrect_answers;
-  // options.splice(randIndex(),0,data.correct_answer);
-  // document.querySelector("#optn1").innerHTML = ;
-  // document.querySelector("#optn2").innerHTML = ;
-  // document.querySelector("#optn3").innerHTML = ;
-  // document.querySelector("#optn4").innerHTML = ;
-  // loading(false);
-}
+
+
 // for (var i = 0; i < ans.length; i++) {
 // 	ans[i].addEventListener("click",function(){
 // 		checkAnswer(this);
