@@ -157,6 +157,15 @@ const questionsHandler = (res) => {
   })
 }
 
+const scoreHandler = (res) => {
+  queries.getScore("tamer",(err, results) => {
+    if (err) handle500(res, err)
+    res.writeHead(200)
+    console.log(results.rows);
+    res.end(JSON.stringify(results.rows[0].score));
+  })
+}
+
 const authCheck = (req, res) => {
   // console.log("udetail cookie is",req.headers.cookie);
   if (!req.headers.cookie) {
@@ -214,5 +223,6 @@ module.exports = {
   signup: handleSignUp,
   signin: handleSignIn,
   questions: questionsHandler,
-  authCheck: authCheck
+  authCheck: authCheck,
+  score:scoreHandler
 }

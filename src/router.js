@@ -18,7 +18,10 @@ const router = (req, res) => {
     }
   } else if (url === '/getquestions') {
     handler.questions(res)
-  } else if(url === '/auth'){
+  }  else if (url === '/getscore') {
+     handler.score(res)
+  }
+  else if(url === '/auth'){
     handler.authCheck(req,res)
   }else {
     handler.error404(res);
