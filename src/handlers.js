@@ -98,7 +98,7 @@ const handleSignIn = (req, res) => {
                           succeed: true
                         }));
 
-                      
+
                     } else {
                       res.writeHead(401, {
                         "content-type": "application/json"
@@ -152,7 +152,9 @@ const handleSignUp = (req, res) => {
 const questionsHandler = (res) => {
   queries.getQuestions((err, results) => {
     if (err) handle500(res, err)
+    res.writeHead(200)
     console.log(results.rows);
+    res.end(JSON.stringify(results.rows));
   })
 
 }
