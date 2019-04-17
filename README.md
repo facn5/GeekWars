@@ -27,3 +27,15 @@ npm run run
 + [ ] Website content should be stored in a database
 + [ ] Include thorough tests on the back-end, testing pure functions and testing routes using Supertest. If you make external API calls, use Nock to mock the response for your tests.
 + [ ] Test front-end logic, we don't expect tests on the DOM.
+
+### Stretch goals
+* will be added soon
+
+### Tools/technologies used
+* Heroku - For deploying/hosting server and database.
+* Tape - for testing.
+* PostgreSQL - for database
+* tap-spec for testing
+* Supertest for testing.
+* nodemon - for hosting locally.
+* Node.js - backend.
