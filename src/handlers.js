@@ -131,10 +131,19 @@ const handleSignUp = (req, res) => {
     }
   });
 }
+const questionsHandler =  (res) => {
+queries.getQuestions((err,results)=>{
+  if(err)handle500(res,err)
+  console.log(results.rows);
+})
+
+
+}
 module.exports = {
   home: handleHome,
   public: handlePublic,
   error404: handle404,
   signup: handleSignUp,
-  signin: handleSignIn
+  signin: handleSignIn,
+  questions:questionsHandler
 }
