@@ -8,6 +8,15 @@ verifyUser(function(data){
       var curScore = document.querySelector("#hscore").textContent;
       let logoutbtn = document.getElementById('logoutbtn');
 
+
+        logoutbtn.addEventListener("click",function(){
+          logout(function(data){
+            if(data.status === 200)
+             console.log("Logged out");
+          })
+        }
+
+
       function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max));
       }
