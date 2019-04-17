@@ -1,46 +1,46 @@
-var ans = document.querySelectorAll(".answer");
-var skipQues = document.querySelector("#skip");
-var waiting = document.querySelector("#waiting");
-var loadAnim = document.querySelector("#waitanim");
-var curScore = document.querySelector("#hscore").textContent;
-// console.log(curScore);
-var data;
+// var ans = document.querySelectorAll(".answer");
+// var skipQues = document.querySelector("#skip");
+// var waiting = document.querySelector("#waiting");
+// var loadAnim = document.querySelector("#waitanim");
+// var curScore = document.querySelector("#hscore").textContent;
+// // console.log(curScore);
+// var data;
 
 verifyUser(function(data){
-  if(console.log(data))
-})
+  console.log(data)
+});
 
-getData((dataq) => {
-  data = dataq;
-  document.querySelector("#question").innerHTML = dataq[0].question;
-  document.querySelector("#optn1").innerHTML = dataq[0].option1;
-  document.querySelector("#optn2").innerHTML = dataq[0].answer;
-  document.querySelector("#optn3").innerHTML = dataq[0].option2;
-  document.querySelector("#optn4").innerHTML = dataq[0].option3;
-  for (var i = 0; i < ans.length; i++) {
-    ans[i].addEventListener("click", function() {
-      checkAnswer(this);
-    });
-  }
+// getData((dataq) => {
+//   data = dataq;
+//   document.querySelector("#question").innerHTML = dataq[0].question;
+//   document.querySelector("#optn1").innerHTML = dataq[0].option1;
+//   document.querySelector("#optn2").innerHTML = dataq[0].answer;
+//   document.querySelector("#optn3").innerHTML = dataq[0].option2;
+//   document.querySelector("#optn4").innerHTML = dataq[0].option3;
+//   for (var i = 0; i < ans.length; i++) {
+//     ans[i].addEventListener("click", function() {
+//       checkAnswer(this);
+//     });
+//   }
+//
+//   function checkAnswer(ele) {
+//     if (ele.innerHTML === dataq[0].answer) {
+//       ele.classList.add("correct");
+//       // loading(true);
+//       document.querySelector("#hscore").innerHTML = ++curScore;
+//       changeQues();
+//     } else {
+//       ele.classList.add("incorrect");
+//       // loading(true);
+//       document.querySelector("#hscore").innerHTML = --curScore;
+//       changeQues();
+//     }
+//   }
+//   console.log(dataq[0].question)
+//
+// })
 
-  function checkAnswer(ele) {
-    if (ele.innerHTML === dataq[0].answer) {
-      ele.classList.add("correct");
-      // loading(true);
-      document.querySelector("#hscore").innerHTML = ++curScore;
-      changeQues();
-    } else {
-      ele.classList.add("incorrect");
-      // loading(true);
-      document.querySelector("#hscore").innerHTML = --curScore;
-      changeQues();
-    }
-  }
-  console.log(dataq[0].question)
-
-})
-
-function updateQues(response) {
+// function updateQues(response) {
   // data = response.data.results[0];
   // document.querySelector("#question").innerHTML = data.question;
   // var options = data.incorrect_answers;
@@ -50,7 +50,7 @@ function updateQues(response) {
   // document.querySelector("#optn3").innerHTML = ;
   // document.querySelector("#optn4").innerHTML = ;
   // loading(false);
-}
+// }
 // for (var i = 0; i < ans.length; i++) {
 // 	ans[i].addEventListener("click",function(){
 // 		checkAnswer(this);
