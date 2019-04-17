@@ -19,7 +19,7 @@ const router = (req, res) => {
   } else if (url === '/getquestions') {
     handler.questions(res)
   }  else if (url === '/getscore') {
-    // handler.questions(res)
+     handler.score(res)
   }
   else if(url === '/auth'){
     handler.authCheck(req,res)
