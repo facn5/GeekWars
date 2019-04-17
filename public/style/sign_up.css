@@ -60,13 +60,22 @@ button:hover {
 
 #main-logo{
   display: flex;
-  align-items: center;
   justify-content: center;
+  height: 300px;
 
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 700px) {
  .cancelbtn, .signupbtn {
    width: 100%;
  }
+ #main-logo{
+height: 200px;
+max-width: 90%;
+margin:0;
+}
+  input[type=text], input[type=password] {
+    padding: 25px;
+
+  }
 }
