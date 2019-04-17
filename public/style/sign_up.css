@@ -58,6 +58,13 @@ button:hover {
  display: table;
 }
 
+#main-logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
 @media screen and (max-width: 300px) {
  .cancelbtn, .signupbtn {
    width: 100%;
