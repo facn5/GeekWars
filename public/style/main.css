@@ -13,6 +13,7 @@ body {
 }
 #logoutbtn{
   float: right;
+    cursor: pointer;
 
 }
 .make-flex {
