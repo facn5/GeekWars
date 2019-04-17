@@ -67,6 +67,10 @@ button:hover {
   flex-direction: column;
 
 }
+#wrong{
+  display:none;
+  color:red;
+}
 @media screen and (max-width: 600px) {
   .cancelbtn, .signupbtn {
      width: 50%;

@@ -1,14 +1,10 @@
+
 var loginbutton = document.getElementById('loginbtn');
 var usertxt = document.getElementById('user');
 var passtxt = document.getElementById('pass');
-// loginbutton.addEventListener("click",fetchlogin())
-function fetchlogin() {
-
-  // console.log(usertxt.innerText);
-   console.log("fetch ran");
-console.log(passtxt);
-// window.event.preventDefault();
-   // console.log("after asd");
+var wronglbl = document.getElementById('wrong')
+loginbutton.addEventListener("click",function(e){
+e.preventDefault();
   fetch("/login", {
     method: 'POST',
     body:JSON.stringify({
@@ -17,18 +13,26 @@ console.log(passtxt);
     })
   })
   .then(function(response){
-    return console.log(response.json());
-
+    console.log(response);
+    // TODO : CHECK RESPONSE STATUS CODE
+     return response.json();
   })
-  .then(function(data) {
-    console.log(data);
-
+  .then(function(logindata) {
+    console.log(logindata);
+    if(logindata.succeed){
+      // TODO : Save details in cookies
+      // console.log("asd");
+      window.location.href = "/main.html";
+    } else {
+      wronglbl.style.display = "block"
+    }
   })
   .catch(function(error){
-    console.log("error fetch");
+    // console.log("error fetch");
     console.log(error);
   });
-}
+// }
+})
 
 // loginbutton.addEventListener("submit",function(d){
 //   console.log(d);

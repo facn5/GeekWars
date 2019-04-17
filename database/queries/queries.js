@@ -6,8 +6,9 @@ const checkPassword = (username, password, cb) => query.select(`SELECT count(id)
 
 const addUser = (username,password,email,cb) => query.insert(`INSERT INTO users (username,password,email) VALUES ($1,$2,$3)`,[username,password,email],cb)
 
-const getQuestions = (cb) => query.select(`SELECT * from qa`)
+const getQuestions = (cb) => query.select(`SELECT * from qa`,cb)
 
+const getPass = (username,cb) => query.select(`SELECT password from users where username = '${username}'`,cb);
 // const getScore = (username,cb) => query.select(`SELECT score from users where username='${username}'`)
 
 const addScore = (username,score,cb) => query.update(`UPDATE users SET score = (SELECT score from users where username='$1')+$2 where username='$1'`,[username,score],cb)
@@ -17,5 +18,6 @@ module.exports = {
   checkPassword,
   addUser,
   getQuestions,
-  addScore
+  addScore,
+  getPass
 }
