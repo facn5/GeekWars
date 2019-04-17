@@ -223,5 +223,6 @@ module.exports = {
   signup: handleSignUp,
   signin: handleSignIn,
   questions: questionsHandler,
-  authCheck: authCheck
+  authCheck: authCheck,
+  score:scoreHandler
 }
