@@ -1,35 +1,35 @@
-var loginbutton = document.getElementById(loginbtn);
-var usertxt = document.getElementById(user).value;
-var passtxt = document.getElementById(pass).value;
+var loginbutton = document.getElementById('loginbtn');
+var usertxt = document.getElementById('user');
+var passtxt = document.getElementById('pass');
+// loginbutton.addEventListener("click",fetchlogin())
+function fetchlogin() {
 
-document.getElementById("loginbtn").addEventListener("submit", function() {
-
-  fetch("/signin", {
+  // console.log(usertxt.innerText);
+   console.log("fetch ran");
+console.log(passtxt);
+// window.event.preventDefault();
+   // console.log("after asd");
+  fetch("/login", {
     method: 'POST',
-    body: JSON.stringify({
-      username:usertxt,
-      password:passtxt
-    }),
-    headers:{
-      'Content-Type': 'application/json'
-    }
-  }).then(res => res.json())
-  .then(response => {
-if(res.status == 200){
-console.log("logged in")
+    body:JSON.stringify({
+      'username':usertxt.value,
+      'password':passtxt.value
+    })
+  })
+  .then(function(response){
+    return console.log(response.json());
 
+  })
+  .then(function(data) {
+    console.log(data);
+
+  })
+  .catch(function(error){
+    console.log("error fetch");
+    console.log(error);
+  });
 }
-else if (res.status == 401){
-console.log("username or password is wrong")
-}
 
-
-  } )
-  .catch(error => console.error('Error:', error));
-
-
-
-
-
-
-});
+// loginbutton.addEventListener("submit",function(d){
+//   console.log(d);
+// })
