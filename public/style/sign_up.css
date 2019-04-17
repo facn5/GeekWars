@@ -44,10 +44,14 @@ button:hover {
  width: 50%;
 }
 
-.container {
- padding: 16px;
-}
+.container{
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
+}
 .clearfix::after {
  content: "";
  clear: both;
