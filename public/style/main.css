@@ -11,15 +11,19 @@ body {
   font-family: 'Libre Franklin', sans-serif;
   background: #F2F2F2;
 }
-#logoutbtn{
-  float: right;
-    cursor: pointer;
-    background-color: #555;
-    color: black;
-    font-size: 24px;
-    border: none;
 
+#logoutbtn {
+  float: right;
+  cursor: pointer;
+  background-color: #555;
+  color: black;
+  font-size: 24px;
+  border: none;
+  display: flex;
+  align-self: flex-end;
+  padding: 20px 15px;
 }
+
 .make-flex {
   display: flex;
   flex-direction: column;
