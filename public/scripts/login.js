@@ -15,11 +15,13 @@ e.preventDefault();
   .then(function(response){
     console.log(response);
     // TODO : CHECK RESPONSE STATUS CODE
+    console.log(response);
      return response.json();
   })
   .then(function(logindata) {
     console.log(logindata);
     if(logindata.succeed){
+      console.log("logged in");
       // TODO : Save details in cookies
       // console.log("asd");
 
