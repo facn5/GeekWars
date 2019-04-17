@@ -3,8 +3,6 @@ const path = require('path');
 const qs = require('querystring');
 const queries = require('../database/queries/queries.js');
 const pwmanager = require('./pwmanager.js');
-const {parse} = require('cookie');
-const {sign,verify} = require('jsonwebtoken');
 
 let extType = {
   html: {
@@ -60,7 +58,7 @@ const handle404 = (res) => {
     }
   })
 }
-const SECRET = "nfkdansfknskfnnfwifwrfmjmjwrrfmwowrorwgj";
+
 const handleSignIn = (req, res) => {
   let data = "";
   req.on("data", chunk => {
@@ -77,20 +75,12 @@ const handleSignIn = (req, res) => {
           queries.getPass(userdata.username, (err, pass) => {
             pwmanager.comparePasswords(userdata.password, pass.rows[0].password, (err, success) => {
               if (success) {
-                const userDetails = {
-                  username: userdata.username
-                }
-                const cookie = sign(userDetails, SECRET);
-                res.writeHead(
-                  200, {
-                    // 'Location': '/main.html',
-                    'Set-Cookie': `udetails=${cookie};`,
-                    'content-type': 'application/json'
-                  });
+                res.writeHead(200, {
+                  "content-type": "application/json"
+                })
                 res.end(JSON.stringify({
                   succeed: true
-                }));
-
+                }))
               } else {
                 res.writeHead(401, {
                   "content-type": "application/json"
