@@ -9,8 +9,6 @@ function getRandomInt(max) {
 }
 
 verifyUser(function(data) {
-  getScore((data) => {
-    var curScore = data.rows[0].score;
 
     if (data.status === 200) {
       var ans = document.querySelectorAll(".answer");
@@ -20,7 +18,9 @@ verifyUser(function(data) {
       var curScore = document.querySelector("#hscore").textContent;
       let logoutbtn = document.getElementById('logoutbtn');
 
-
+      getScore((data) => {
+        var curScore = data;
+      })
       logoutbtn.addEventListener("click", function() {
         logout();
         window.location.href = '/index.html'
@@ -96,7 +96,5 @@ verifyUser(function(data) {
         window.location.href = "/login.html"
       }
     }
-
-  });
 
 })
