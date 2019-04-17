@@ -1,5 +1,3 @@
-let logoutbtn = document.getElementById('logoutbtn');
-
 function logout(cb){
   fetch('/logout')
   .then(function(response){
