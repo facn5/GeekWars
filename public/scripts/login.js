@@ -24,7 +24,7 @@ e.preventDefault();
       // console.log("asd");
       window.location.href = "/main.html";
     } else {
-      // TODO : Show label
+      wronglbl.style.display = "block"
     }
   })
   .catch(function(error){
