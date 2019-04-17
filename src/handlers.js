@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const qs = require('querystring');
-const query = require('../database/queries/queries.js');
+const queries = require('../database/queries/queries.js');
 
  let extType = {
   html: { "content-type": "text/html" },
@@ -51,24 +51,34 @@ const handlePublic = (url, res) => {
 }
 
 const handleSignIn = (req,res)=>{
-  let body = "";
+  let data = "";
   req.on("data", chunk => {
-    body += chunk.toString();
+    data += chunk.toString();
   });
   req.on("end", () => {
-    if (body != null) {
-      const userdata = qs.parse(body);
-      queries.checkPassword(userdata.uname, userdata.psw, (err, result) => {
+    if (data != null) {
+      // console.log(data);
+      const userdata = JSON.parse(data);
+      // console.log(userdata);
+      queries.checkPassword(userdata.username, userdata.password, (err, result) => {
         if (err) {
           handle500(res,err);
         }
-        if(result === 1){
-          res.writeHead(200)
-          res.end()
-        }else{
-          res.writeHead(401)
-          res.end()
-        }
+        // console.log(result.rows[0].count);
+        if(result.rows[0].count === 1){
+          res.writeHead(200,{"content-type":"application/json"})
+          res.end(JSON.stringify({exist:1}))
+       }else {
+         res.writeHead(401,{"content-type":"application/json"})
+         res.end(JSON.stringify({exist:0}));
+       }
+
+       // else{
+        //   // console.log(userdata.uname);
+        //   // console.log(userdata.psw);
+        //   res.writeHead(401)
+        //   res.end()
+        // }
       });
     }
   });

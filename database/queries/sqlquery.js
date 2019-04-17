@@ -6,7 +6,7 @@ const selectquery = (sql, cb) => {
     if (err) {
       cb(err);
     } else {
-      cb(null, res.rows);
+      cb(null, res);
     }
   });
 };
