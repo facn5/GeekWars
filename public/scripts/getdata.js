@@ -3,9 +3,12 @@ var skipQues = document.querySelector("#skip");
 var waiting = document.querySelector("#waiting");
 var loadAnim = document.querySelector("#waitanim");
 var curScore = document.querySelector("#hscore").textContent;
-console.log(curScore);
+// console.log(curScore);
 var data;
 
+verifyUser(function(data){
+  if(console.log(data))
+})
 
 getData((dataq) => {
   data = dataq;
