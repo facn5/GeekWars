@@ -11,7 +11,7 @@ verifyUser(function(data){
 
         logoutbtn.addEventListener("click",function(){
           logout();
-        }
+        })
 
 
       function getRandomInt(max) {
