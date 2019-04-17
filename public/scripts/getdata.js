@@ -11,6 +11,7 @@ verifyUser(function(data){
 
         logoutbtn.addEventListener("click",function(){
           logout();
+          window.location.href = '/index.html'
         })
 
 
