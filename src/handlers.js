@@ -3,9 +3,7 @@ const path = require('path');
 const qs = require('querystring');
 const queries = require('../database/queries/queries.js');
 const pwmanager = require('./pwmanager.js');
-const {
-  parse
-} = require('cookie');
+const ppcookie = require('cookie');
 const {
   sign,
   verify
@@ -66,58 +64,59 @@ const handle404 = (res) => {
   })
 }
 const SECRET = "nfkdansfknskfnnfwifwrfmjmjwrrfmwowrorwgj";
+
 const handleSignIn = (req, res) => {
   let data = "";
   req.on("data", chunk => {
     data += chunk.toString();
   });
   req.on("end", () => {
-      if (data != null) {
-        // console.log(data);
-        const userdata = JSON.parse(data);
-        // console.log(userdata);
-        queries.userExist(userdata.username, (err, usern) => {
-            if (err) handle500(res, err);
-            if (usern.rows[0].count > 0) {
-              queries.getPass(userdata.username, (err, pass) => {
-                  pwmanager.comparePasswords(userdata.password, pass.rows[0].password, (err, success) => {
-                      if (success) {
-                        const userDetails = {
-                          "content-type": "application/json",
-                          'username': userdata.username
-                        }
+    if (data != null) {
+      // console.log(data);
+      const userdata = JSON.parse(data);
+      // console.log(userdata);
+      queries.userExist(userdata.username, (err, usern) => {
+        if (err) handle500(res, err);
+        if (usern.rows[0].count > 0) {
+          queries.getPass(userdata.username, (err, pass) => {
+            pwmanager.comparePasswords(userdata.password, pass.rows[0].password, (err, success) => {
+              if (success) {
+                const userDetails = {
+                  "content-type": "application/json",
+                  'username': userdata.username
+                }
 
-                        const cookie = sign(userDetails, SECRET);
-                        res.writeHead(
-                          200, {
-                            // 'Location': '/main.html',
-                            'Set-Cookie': `udetails=${cookie};`,
-                            'content-type': 'application/json'
-                          });
-                        res.end(JSON.stringify({
-                          succeed: true
-                        }));
+                const cookie = sign(userDetails, SECRET);
+                res.writeHead(
+                  200, {
+                    // 'Location': '/main.html',
+                    'Set-Cookie': `udetails=${cookie};`,
+                    'content-type': 'application/json'
+                  });
+                res.end(JSON.stringify({
+                  succeed: true
+                }));
 
 
-                    } else {
-                      res.writeHead(401, {
-                        "content-type": "application/json"
-                      })
-                      res.end(JSON.stringify({
-                        succeed: false
-                      }));
-                    }
-                  })
-              });
-          } else {
-            res.writeHead(401, {
-              "content-type": "application/json"
+              } else {
+                res.writeHead(401, {
+                  "content-type": "application/json"
+                })
+                res.end(JSON.stringify({
+                  succeed: false
+                }));
+              }
             })
-            res.end(JSON.stringify({
-              succeed: false
-            }));
-          }
-        })
+          });
+        } else {
+          res.writeHead(401, {
+            "content-type": "application/json"
+          })
+          res.end(JSON.stringify({
+            succeed: false
+          }));
+        }
+      })
     }
   });
 }
@@ -153,16 +152,67 @@ const questionsHandler = (res) => {
   queries.getQuestions((err, results) => {
     if (err) handle500(res, err)
     res.writeHead(200)
-    console.log(results.rows);
+    // console.log(results.rows);
     res.end(JSON.stringify(results.rows));
   })
-
 }
+
+const authCheck = (req, res) => {
+  // console.log("udetail cookie is",req.headers.cookie);
+  if (!req.headers.cookie) {
+    const message = 'unauthorized';
+    res.writeHead(
+      401, {
+        'Content-Type': 'text/plain',
+        'Content-Length': message.length
+      }
+    );
+    res.end(message);
+  }
+  let jwt;
+  try {
+     jwt = ppcookie.parse(req.headers.cookie);
+  } catch (error) {
+    const message = 'unauthorized';
+    res.writeHead(401, {
+      'Content-Type': 'text/plain',
+      'Content-Length': message.length
+    })
+    res.end(message);
+  }
+
+  if (jwt) {
+    verify(jwt.udetails, SECRET, (err, jwt) => {
+      if (err) {
+        const message = 'unauthorized';
+        res.writeHead(
+          401, {
+            'Content-Type': 'text/plain',
+            'Content-Length': message.length
+          }
+        );
+        res.end(message);
+      } else {
+        const message = "authorized";
+        res.writeHead(
+          200, {
+            'Content-Type': 'text/plain',
+            'Content-Length': message.length
+          }
+        );
+        return res.end(message);
+      }
+    });
+  }
+}
+
+
 module.exports = {
   home: handleHome,
   public: handlePublic,
   error404: handle404,
   signup: handleSignUp,
   signin: handleSignIn,
-  questions: questionsHandler
+  questions: questionsHandler,
+  authCheck: authCheck
 }

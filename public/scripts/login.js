@@ -23,7 +23,7 @@ e.preventDefault();
       // TODO : Save details in cookies
       // console.log("asd");
       console.log("logged in");
-      // window.location.href = "/main.html";
+      window.location.href = "/main.html";
     } else {
       wronglbl.style.display = "block"
     }
