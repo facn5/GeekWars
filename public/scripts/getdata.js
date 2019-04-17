@@ -7,7 +7,7 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
  getScore((data)=>{
-var curScore = data.row;
+var curScore = data.rows[0].score;
 
 
 });
