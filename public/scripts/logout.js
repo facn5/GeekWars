@@ -1,8 +1,5 @@
-function logout(cb){
+function logout(){
   fetch('/logout')
-  .then(function(response){
-    return cb(response);
-  })
   .catch(function(error){
     console.log(error);
   })
