@@ -6,7 +6,11 @@ var curScore = document.querySelector("#hscore").textContent;
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
-var curScore = getScore("tamer");
+ getScore((data)=>{
+var curScore = data.row;
+
+
+});
  var question = getRandomInt(9);
  console.log(curScore);
 var data;

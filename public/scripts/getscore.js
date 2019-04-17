@@ -1,4 +1,4 @@
-function getData(cb) {
+function getScore(cb) {
   fetch("/getscore")
     .then(response => {
       if (response.status !== 200) {
