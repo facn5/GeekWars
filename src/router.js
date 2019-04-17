@@ -6,7 +6,7 @@ const router = (req, res) => {
   let url = req.url;
   if (url === "/") {
     handler.home(res);
-  }else if (url.includes('.')) {
+  } else if (url.includes('.')) {
     handler.public(url, res);
   } else if(url === '/signup'){
     if(req.method === 'POST'){
