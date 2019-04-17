@@ -20,6 +20,8 @@ const router = (req, res) => {
     handler.questions(res)
   } else if(url === '/auth'){
     handler.authCheck(req,res)
+  }else if(url === '/logout'){
+    handler.logout(req,res)
   }else {
     handler.error404(res);
   }
