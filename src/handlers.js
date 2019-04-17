@@ -3,6 +3,13 @@ const path = require('path');
 const qs = require('querystring');
 const queries = require('../database/queries/queries.js');
 const pwmanager = require('./pwmanager.js');
+const {
+  parse
+} = require('cookie');
+const {
+  sign,
+  verify
+} = require('jsonwebtoken');
 
 let extType = {
   html: {
@@ -58,48 +65,59 @@ const handle404 = (res) => {
     }
   })
 }
-
+const SECRET = "nfkdansfknskfnnfwifwrfmjmjwrrfmwowrorwgj";
 const handleSignIn = (req, res) => {
   let data = "";
   req.on("data", chunk => {
     data += chunk.toString();
   });
   req.on("end", () => {
-    if (data != null) {
-      // console.log(data);
-      const userdata = JSON.parse(data);
-      // console.log(userdata);
-      queries.userExist(userdata.username, (err, usern) => {
-        if (err) handle500(res, err);
-        if (usern.rows[0].count > 0) {
-          queries.getPass(userdata.username, (err, pass) => {
-            pwmanager.comparePasswords(userdata.password, pass.rows[0].password, (err, success) => {
-              if (success) {
-                res.writeHead(200, {
-                  "content-type": "application/json"
-                })
-                res.end(JSON.stringify({
-                  succeed: true
-                }))
-              } else {
-                res.writeHead(401, {
-                  "content-type": "application/json"
-                })
-                res.end(JSON.stringify({
-                  succeed: false
-                }));
-              }
+      if (data != null) {
+        // console.log(data);
+        const userdata = JSON.parse(data);
+        // console.log(userdata);
+        queries.userExist(userdata.username, (err, usern) => {
+            if (err) handle500(res, err);
+            if (usern.rows[0].count > 0) {
+              queries.getPass(userdata.username, (err, pass) => {
+                  pwmanager.comparePasswords(userdata.password, pass.rows[0].password, (err, success) => {
+                      if (success) {
+                        const userDetails = {
+                          "content-type": "application/json",
+                          'username': userdata.username
+                        }
+
+                        const cookie = sign(userDetails, SECRET);
+                        res.writeHead(
+                          200, {
+                            // 'Location': '/main.html',
+                            'Set-Cookie': `udetails=${cookie};`,
+                            'content-type': 'application/json'
+                          });
+                        res.end(JSON.stringify({
+                          succeed: true
+                        }));
+
+                      
+                    } else {
+                      res.writeHead(401, {
+                        "content-type": "application/json"
+                      })
+                      res.end(JSON.stringify({
+                        succeed: false
+                      }));
+                    }
+                  })
+              });
+          } else {
+            res.writeHead(401, {
+              "content-type": "application/json"
             })
-          });
-        } else {
-          res.writeHead(401, {
-            "content-type": "application/json"
-          })
-          res.end(JSON.stringify({
-            succeed: false
-          }));
-        }
-      })
+            res.end(JSON.stringify({
+              succeed: false
+            }));
+          }
+        })
     }
   });
 }
@@ -131,12 +149,11 @@ const handleSignUp = (req, res) => {
     }
   });
 }
-const questionsHandler =  (res) => {
-queries.getQuestions((err,results)=>{
-  if(err)handle500(res,err)
-  console.log(results.rows);
-})
-
+const questionsHandler = (res) => {
+  queries.getQuestions((err, results) => {
+    if (err) handle500(res, err)
+    console.log(results.rows);
+  })
 
 }
 module.exports = {
@@ -145,5 +162,5 @@ module.exports = {
   error404: handle404,
   signup: handleSignUp,
   signin: handleSignIn,
-  questions:questionsHandler
+  questions: questionsHandler
 }
