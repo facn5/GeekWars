@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Sign Up - GeekWars</title>
+    <link rel="stylesheet" type="text/css" href="./style/sign_up.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  </head>
+  <body>
+    <div id="main-logo">
+      <img src="./assets/logo.jpg">
+    </div>
+
+    <form action="/sign_up" method="POST">
+      <div class="container">
+        <h1>Sign Up</h1>
+        <hr>
+
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Email" name="username" required>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+
+        <div class="clearfix">
+        </div>
+
+        <button type="submit" class="signupbtn">Sign Up</button>
+      </div>
+    </form>
+
+
+  </body>
+</html>
