@@ -209,8 +209,7 @@ const authCheck = (req, res) => {
 const logout = (req, res) => {
   if (req.headers.cookie) {
     res.writeHead(
-      302, {
-        'Location': '/',
+      200, {
         'Set-Cookie': 'udetails=0; Max-Age=0'
       }
     );
