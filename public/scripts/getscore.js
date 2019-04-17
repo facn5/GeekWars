@@ -1,5 +1,5 @@
 function getData(cb) {
-  fetch("/getquestions")
+  fetch("/getscore")
     .then(response => {
       if (response.status !== 200) {
         console.log(
