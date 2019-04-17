@@ -10,10 +10,7 @@ verifyUser(function(data){
 
 
         logoutbtn.addEventListener("click",function(){
-          logout(function(data){
-            if(data.status === 200)
-             console.log("Logged out");
-          })
+          logout();
         }
 
 
