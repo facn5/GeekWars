@@ -16,8 +16,9 @@ getData((dataq) => {
   data = dataq;
 	function updateQues(response) {
 
-question++;
-console.log(question);
+  question++;
+
+
 
 		document.querySelector("#question").innerHTML =dataq[question].question;
 		document.querySelector("#optn1").innerHTML = dataq[question].option1;
@@ -39,10 +40,10 @@ console.log(question);
 				if(question<9){
 
 					checkAnswer(this);
-
 				}
 				else{
-					alert("you finished all the questions, go to the leaderboard page to find your score!")
+					alert("you finished all the questions, go to the leaderboard page to find your score!");
+					curScore=0;
 
 				}
 			});
@@ -50,13 +51,12 @@ console.log(question);
 
 		function checkAnswer(ele) {
 			if (ele.innerHTML === dataq[question].answer) {
-				ele.classList.add("correct");
+		//		ele.classList.add("correct");
 				document.querySelector("#hscore").innerHTML = ++curScore;
-				ele.classList.remove("correct");
 
 			 updateQues();
 			} else {
-				ele.classList.add("incorrect");
+//				ele.classList.add("incorrect");
 				// loading(true);
 				document.querySelector("#hscore").innerHTML = --curScore;
 
