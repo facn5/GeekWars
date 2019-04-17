@@ -64,6 +64,7 @@ const handle404 = (res) => {
   })
 }
 const SECRET = "nfkdansfknskfnnfwifwrfmjmjwrrfmwowrorwgj";
+
 const handleSignIn = (req, res) => {
   let data = "";
   req.on("data", chunk => {
@@ -151,7 +152,7 @@ const questionsHandler = (res) => {
   queries.getQuestions((err, results) => {
     if (err) handle500(res, err)
     res.writeHead(200)
-    console.log(results.rows);
+    // console.log(results.rows);
     res.end(JSON.stringify(results.rows));
   })
 }
@@ -168,29 +169,41 @@ const authCheck = (req, res) => {
     );
     res.end(message);
   }
-  const jwt  = ppcookie.parse(req.headers.cookie);
-  verify(jwt.udetails, SECRET, (err, jwt) => {
-        if (err) {
-          const message = 'unauthorized';
-          res.writeHead(
-            401, {
-              'Content-Type': 'text/plain',
-              'Content-Length': message.length
-            }
-          );
-          res.end(message);
-        } else {
-          const message = "authorized";
-          res.writeHead(
-            200,
-            {
-              'Content-Type': 'text/plain',
-              'Content-Length': message.length
-            }
-          );
-          return res.end(message);
-        }
-      });
+  let jwt;
+  try {
+     jwt = ppcookie.parse(req.headers.cookie);
+  } catch (error) {
+    const message = 'unauthorized';
+    res.writeHead(401, {
+      'Content-Type': 'text/plain',
+      'Content-Length': message.length
+    })
+    res.end(message);
+  }
+
+  if (jwt) {
+    verify(jwt.udetails, SECRET, (err, jwt) => {
+      if (err) {
+        const message = 'unauthorized';
+        res.writeHead(
+          401, {
+            'Content-Type': 'text/plain',
+            'Content-Length': message.length
+          }
+        );
+        res.end(message);
+      } else {
+        const message = "authorized";
+        res.writeHead(
+          200, {
+            'Content-Type': 'text/plain',
+            'Content-Length': message.length
+          }
+        );
+        return res.end(message);
+      }
+    });
+  }
 }
 
 
@@ -201,5 +214,5 @@ module.exports = {
   signup: handleSignUp,
   signin: handleSignIn,
   questions: questionsHandler,
-  authCheck : authCheck
+  authCheck: authCheck
 }
