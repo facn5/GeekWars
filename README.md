@@ -39,3 +39,8 @@ npm run run
 * Supertest for testing.
 * nodemon - for hosting locally.
 * Node.js - backend.
+
+### Team Members
+### Team members
+* Shadi: [Github Profile Page](https://github.com/mrfong)
+* Tamer: [Github Profile Page](https://github.com/tamerNasser)
