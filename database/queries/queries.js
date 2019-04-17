@@ -19,5 +19,6 @@ module.exports = {
   addUser,
   getQuestions,
   addScore,
-  getPass
+  getPass,
+  getScore
 }
