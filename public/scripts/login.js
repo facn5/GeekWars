@@ -22,6 +22,7 @@ e.preventDefault();
     if(logindata.succeed){
       // TODO : Save details in cookies
       // console.log("asd");
+
       window.location.href = "/main.html";
     } else {
       wronglbl.style.display = "block"
