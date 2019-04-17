@@ -180,7 +180,7 @@ const authCheck = (req, res) => {
   }
   let jwt;
   try {
-     jwt = ppcookie.parse(req.headers.cookie);
+    jwt = ppcookie.parse(req.headers.cookie);
   } catch (error) {
     const message = 'unauthorized';
     res.writeHead(401, {
@@ -215,6 +215,16 @@ const authCheck = (req, res) => {
   }
 }
 
+const logout = (req, res) => {
+  if (req.headers.cookie) {
+    res.writeHead(
+      200, {
+        'Set-Cookie': 'udetails=0; Max-Age=0'
+      }
+    );
+    res.end()
+  }
+}
 
 module.exports = {
   home: handleHome,
@@ -224,5 +234,6 @@ module.exports = {
   signin: handleSignIn,
   questions: questionsHandler,
   authCheck: authCheck,
+  logout : logout,
   score:scoreHandler
 }
