@@ -31,7 +31,7 @@ verifyUser(function(data) {
         return Math.floor(Math.random() * Math.floor(max));
       }
 
-      var question = getRandomInt(9);
+      var question = getRandomInt(2);
       // console.log(curScore);
       var data;
 
@@ -88,9 +88,9 @@ verifyUser(function(data) {
 
             }
         else{
-          updateQues();
 
         }
+        updateQues();
 
           }
         }
