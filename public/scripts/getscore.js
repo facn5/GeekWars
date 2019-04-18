@@ -5,7 +5,7 @@ function getScore(cb) {
         console.log(
           "Looks like there was a problem. Status Code: " + response.status
         );
-        return;
+        return "Looks like there was a problem. Status Code: " + response.status;
       }
       return response.json();
     })
