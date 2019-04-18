@@ -83,6 +83,7 @@ verifyUser(function(data) {
             //				ele.classList.add("incorrect");
             // loading(true);
             document.querySelector("#hscore").innerHTML = --curScore;
+            updateQues();
 
           }
         }
