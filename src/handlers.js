@@ -144,7 +144,8 @@ const handleSignUp = (req, res) => {
             succeed: false
           }));
         } else {
-          pwmanager.hashPassword(userdata.pass,(err,hashedpass)=>{
+          console.log(userdata);
+          pwmanager.hashPassword(userdata.password,(err,hashedpass)=>{
             if(err)handle500(res,err);
             console.log(hashedpass);
             queries.addUser(userdata.username, hashedpass, userdata.email, (err, result) => {
