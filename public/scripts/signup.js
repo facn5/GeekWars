@@ -7,6 +7,7 @@ var form = document.getElementsByTagName("form")[0];
 var emailErr = document.getElementById("emailErr");
 var passwordErr = document.getElementById("passwordErr");
 var confirmErr = document.getElementById("confirmErr");
+var userErr = document.getElementById("userErr");
 
 var checkEmail = function() {
   if (email.validity.typeMismatch) {
@@ -52,37 +53,39 @@ email.addEventListener("focusout", checkEmail);
 password.addEventListener("focusout", checkPw);
 confirmPassword.addEventListener("focusout", checkConfirmPw);
 
-signupbtn.addEventListener("click", function(event) {
-  if(!checkPW() || !checkEmail() || !checkConfirmPw()){
+signupbtn.addEventListener("click", function() {
+  if (!checkPw() || !checkEmail() || !checkConfirmPw()) {
 
-  }else{
-  fetch("/signup", {
-      method: 'POST',
-      body: JSON.stringify({
-        'username': username.value,
-        'password': password.value,
-        'email': email.value
+  } else {
+    fetch("/signup", {
+        method: 'POST',
+        body: JSON.stringify({
+          'username': username.value,
+          'password': password.value,
+          'email': email.value
+        })
       })
-    })
-    .then(function(response) {
-      console.log(response);
-      // TODO : CHECK RESPONSE STATUS CODE
-      return response.json();
-    })
-    .then(function(logindata) {
-      console.log(signupdata);
-      if (signupdata.succeed) {
-        // TODO : Save details in cookies
-        // console.log("asd");
-        window.location.href = "/login.html";
-      } else {
+      .then(function(response) {
+        console.log("FE response is", response);
+        console.log("1");
+        // TODO : CHECK RESPONSE STATUS CODE
+        return response.json();
 
-      }
-    })
-    .catch(function(error) {
-      // console.log("error fetch");
-      console.log(error);
-    });
+      })
+      .then(function(signupdata) {
+        console.log("2");
+        // console.log(signupdata);
+        if (signupdata.succeed) {
+          alert("Successfully signup, go to login page")
+          window.location.href = "/login.html";
+        } else {
+          displayErr(userErr, "Username exists")
+        }
+      })
+      .catch(function(error) {
+        console.log("error fetch");
+        console.log(error);
+      });
   }
 });
 

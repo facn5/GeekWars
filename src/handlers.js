@@ -120,6 +120,7 @@ const handleSignIn = (req, res) => {
     }
   });
 }
+
 const handleSignUp = (req, res) => {
   let body = "";
   req.on("data", chunk => {
@@ -127,27 +128,48 @@ const handleSignUp = (req, res) => {
   });
   req.on("end", () => {
     if (body != null) {
-      const userdata = qs.parse(body);
-      queries.userExist(userdata.uname, (err, resultexist) => {
+      const userdata = JSON.parse(body);
+      queries.userExist(userdata.username, (err, usern) => {
         if (err) {
+          console.log("err1");
           handle500(res, err);
+
         }
-        if (resultexist === 0) {
-          queries.addUser(username, password, email, (err, result) => {
-            if (err) {
-              handle500(res, err);
-            }
-            res.writeHead(200)
-            res.end()
+        // console.log(usern);
+        if (usern.rows[0].count > 0) {
+          res.writeHead(401, {
+            "content-type": "application/json"
           })
+          res.end(JSON.stringify({
+            succeed: false
+          }));
         } else {
-          res.writeHead(401)
-          res.end()
+          console.log(userdata);
+          pwmanager.hashPassword(userdata.password,(err,hashedpass)=>{
+            if(err)handle500(res,err);
+            console.log(hashedpass);
+            queries.addUser(userdata.username, hashedpass, userdata.email, (err, result) => {
+              if (err) {
+                console.log("err2");
+                console.log(err);
+                handle500(res, err);
+              }
+              res.writeHead(200, {
+                "content-type": "application/json"
+              })
+              res.end(JSON.stringify({
+                succeed: true
+              }))
+            })
+          })
+
+
         }
       });
     }
   });
 }
+
 const questionsHandler = (res) => {
   queries.getQuestions((err, results) => {
     if (err) handle500(res, err)
@@ -158,10 +180,10 @@ const questionsHandler = (res) => {
 }
 
 const scoreHandler = (res) => {
-  queries.getScore("tamer",(err, results) => {
+  queries.getScore("tamer", (err, results) => {
     if (err) handle500(res, err)
     res.writeHead(200)
-    console.log(results.rows);
+    // console.log(results.rows);
     res.end(JSON.stringify(results.rows[0].score));
   })
 }
@@ -234,6 +256,6 @@ module.exports = {
   signin: handleSignIn,
   questions: questionsHandler,
   authCheck: authCheck,
-  logout : logout,
-  score:scoreHandler
+  logout: logout,
+  score: scoreHandler
 }
