@@ -82,7 +82,15 @@ verifyUser(function(data) {
           } else {
             //				ele.classList.add("incorrect");
             // loading(true);
-            document.querySelector("#hscore").innerHTML = --curScore;
+            if(curScore>0){
+
+              document.querySelector("#hscore").innerHTML = --curScore;
+
+            }
+        else{
+          updateQues();
+
+        }
 
           }
         }
