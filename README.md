@@ -1,5 +1,5 @@
 # GeekWars
-[Go to website](#)
+[Go to website](https://geekwarsq.herokuapp.com/)
 
 ### What ?
 
@@ -40,7 +40,7 @@ npm run run
 * nodemon - for hosting locally.
 * Node.js - backend.
 
-### Team Members
+
 ### Team members
 * Shadi: [Github Profile Page](https://github.com/mrfong)
 * Tamer: [Github Profile Page](https://github.com/tamerNasser)
