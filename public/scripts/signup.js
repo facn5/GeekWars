@@ -7,6 +7,7 @@ var form = document.getElementsByTagName("form")[0];
 var emailErr = document.getElementById("emailErr");
 var passwordErr = document.getElementById("passwordErr");
 var confirmErr = document.getElementById("confirmErr");
+var userErr = document.getElementById("userErr");
 
 var checkEmail = function() {
   if (email.validity.typeMismatch) {
@@ -53,7 +54,7 @@ password.addEventListener("focusout", checkPw);
 confirmPassword.addEventListener("focusout", checkConfirmPw);
 
 signupbtn.addEventListener("click", function(event) {
-  if(!checkPW() || !checkEmail() || !checkConfirmPw()){
+  if(!checkPw() || !checkEmail() || !checkConfirmPw()){
 
   }else{
   fetch("/signup", {
@@ -65,18 +66,16 @@ signupbtn.addEventListener("click", function(event) {
       })
     })
     .then(function(response) {
-      console.log(response);
+      console.log("FE response is",response);
       // TODO : CHECK RESPONSE STATUS CODE
       return response.json();
     })
-    .then(function(logindata) {
+    .then(function(signupdata) {
       console.log(signupdata);
       if (signupdata.succeed) {
-        // TODO : Save details in cookies
-        // console.log("asd");
         window.location.href = "/login.html";
       } else {
-
+        displayErr(userErr,"Username exists")
       }
     })
     .catch(function(error) {
