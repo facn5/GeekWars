@@ -127,22 +127,17 @@ const handleSignUp = (req, res) => {
   });
   req.on("end", () => {
     if (body != null) {
-      const userdata = qs.parse(body);
-      queries.userExist(userdata.uname, (err, resultexist) => {
-        if (err) {
-          handle500(res, err);
-        }
-        if (resultexist === 0) {
-          queries.addUser(username, password, email, (err, result) => {
-            if (err) {
-              handle500(res, err);
-            }
-            res.writeHead(200)
-            res.end()
+      const userdata = JSON.parse(body);
+      queries.userExist(userdata.username, (err, usern) => {
+        if (err) handle500(res, err);
+        console.log(usern);
+        if (usern.rows[0].count > 0) {
+          res.writeHead(401, {
+            "content-type": "application/json"
           })
-        } else {
-          res.writeHead(401)
-          res.end()
+          res.end(JSON.stringify({
+            succeed: false
+          }));
         }
       });
     }
@@ -158,7 +153,7 @@ const questionsHandler = (res) => {
 }
 
 const scoreHandler = (res) => {
-  queries.getScore("tamer",(err, results) => {
+  queries.getScore("tamer", (err, results) => {
     if (err) handle500(res, err)
     res.writeHead(200)
     console.log(results.rows);
@@ -234,6 +229,6 @@ module.exports = {
   signin: handleSignIn,
   questions: questionsHandler,
   authCheck: authCheck,
-  logout : logout,
-  score:scoreHandler
+  logout: logout,
+  score: scoreHandler
 }
