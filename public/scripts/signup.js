@@ -52,16 +52,10 @@ email.addEventListener("focusout", checkEmail);
 password.addEventListener("focusout", checkPw);
 confirmPassword.addEventListener("focusout", checkConfirmPw);
 
-form.addEventListener("submit", function(event) {
-  if (!checkEmail()) {
-    event.preventDefault();
-  }
-  if (!checkPw()) {
-    event.preventDefault();
-  }
-  if (!checkConfirmPw()) {
-    event.preventDefault();
-  }
+signupbtn.addEventListener("click", function(event) {
+  if(!checkPW() || !checkEmail() || !checkConfirmPw()){
+
+  }else{
   fetch("/signup", {
       method: 'POST',
       body: JSON.stringify({
@@ -89,6 +83,7 @@ form.addEventListener("submit", function(event) {
       // console.log("error fetch");
       console.log(error);
     });
+  }
 });
 
 
