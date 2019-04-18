@@ -53,35 +53,39 @@ email.addEventListener("focusout", checkEmail);
 password.addEventListener("focusout", checkPw);
 confirmPassword.addEventListener("focusout", checkConfirmPw);
 
-signupbtn.addEventListener("click", function(event) {
-  if(!checkPw() || !checkEmail() || !checkConfirmPw()){
+signupbtn.addEventListener("click", function() {
+  if (!checkPw() || !checkEmail() || !checkConfirmPw()) {
 
-  }else{
-  fetch("/signup", {
-      method: 'POST',
-      body: JSON.stringify({
-        'username': username.value,
-        'password': password.value,
-        'email': email.value
+  } else {
+    fetch("/signup", {
+        method: 'POST',
+        body: JSON.stringify({
+          'username': username.value,
+          'password': password.value,
+          'email': email.value
+        })
       })
-    })
-    .then(function(response) {
-      console.log("FE response is",response);
-      // TODO : CHECK RESPONSE STATUS CODE
-      return response.json();
-    })
-    .then(function(signupdata) {
-      console.log(signupdata);
-      if (signupdata.succeed) {
-        window.location.href = "/login.html";
-      } else {
-        displayErr(userErr,"Username exists")
-      }
-    })
-    .catch(function(error) {
-      // console.log("error fetch");
-      console.log(error);
-    });
+      .then(function(response) {
+        console.log("FE response is", response);
+        console.log("1");
+        // TODO : CHECK RESPONSE STATUS CODE
+        return response.json();
+
+      })
+      .then(function(signupdata) {
+        console.log("2");
+        // console.log(signupdata);
+        if (signupdata.succeed) {
+          alert("Successfully signup, go to login page")
+          window.location.href = "/login.html";
+        } else {
+          displayErr(userErr, "Username exists")
+        }
+      })
+      .catch(function(error) {
+        console.log("error fetch");
+        console.log(error);
+      });
   }
 });
 
