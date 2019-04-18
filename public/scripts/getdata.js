@@ -91,7 +91,7 @@ verifyUser(function(data) {
 
     } else {
       if (window.confirm('You are not logged in, do you want to make an account?')) {
-        window.location.href = "/register.html"
+        window.location.href = "/sign_up.html"
       } else {
         window.location.href = "/login.html"
       }
