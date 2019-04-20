@@ -41,5 +41,5 @@ npm run run
 
 
 ### Team members
-* Shadi: [Github Profile Page](https://github.com/mrfong)
+* Shadi: [Github Profile Page](https://github.com/shadiray)
 * Tamer: [Github Profile Page](https://github.com/tamerNasser)
